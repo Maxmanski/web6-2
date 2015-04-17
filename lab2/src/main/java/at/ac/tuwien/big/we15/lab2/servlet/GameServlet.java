@@ -3,12 +3,14 @@ package at.ac.tuwien.big.we15.lab2.servlet;
 import java.util.List;
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import at.ac.tuwien.big.we15.lab2.api.*;
 import at.ac.tuwien.big.we15.lab2.api.impl.*;
@@ -44,6 +46,10 @@ public class GameServlet extends HttpServlet {
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
 		List<Category> categories = provider.getCategoryData();
 		
+		HttpSession session = request.getSession(true); 
+		session.setAttribute("categories", categories);
+		//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userpage.jsp"); }
+		//dispatcher.forward(request, response);
 		// category has name and holds questions
 		// questions have attributes and answers
 	}
