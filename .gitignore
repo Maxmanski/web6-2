@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #Ignore Settings from Eclipse
 .settings/
 
@@ -6,3 +7,9 @@
 .project
 
 target/
+=======
+/target/
+.classpath
+/.settings/
+.project
+>>>>>>> origin/master
