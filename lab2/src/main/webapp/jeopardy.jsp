@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<jsp:useBean id="categories" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory" />
+<jsp:useBean id="category" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory" />
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>

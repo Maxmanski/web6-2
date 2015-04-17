@@ -47,11 +47,9 @@ public class GameServlet extends HttpServlet {
 		List<Category> categories = provider.getCategoryData();
 		
 		HttpSession session = request.getSession(true); 
-		session.setAttribute("categories", categories);
-		//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userpage.jsp"); }
-		//dispatcher.forward(request, response);
-		// category has name and holds questions
-		// questions have attributes and answers
+		session.setAttribute("categories", categories.get(0));
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp"); 
+		dispatcher.forward(request, response);
 	}
 
 }

@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp"); 
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GameServlet"); 
 		dispatcher.forward(request, response);
 	}
 
