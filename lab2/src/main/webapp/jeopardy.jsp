@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page contentType="text/html" %> 
 <%@ page session="true" %>
-<!-- %@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" % -->
+
 <!-- jsp:useBean id="category" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory" /  -->
 <jsp:useBean id="categories" type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>" scope="session"></jsp:useBean>
 
@@ -23,7 +22,7 @@
    
    
    <c:forEach items="${categories}" var="category" varStatus="status1">
-           Name: <c:out value="${category.Name}"/>
+           Name: <c:out value="${category.name}"/>
     </c:forEach>
    
    
