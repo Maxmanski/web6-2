@@ -39,12 +39,14 @@ public class EvaluationServlet extends HttpServlet {
 		HttpSession session = request.getSession(true); 
 		int counter = (int) session.getAttribute("counter");
 		
-		//TODO Spielstand zur Session hinzufügen
+		//TODO add score to the session
 		
 		RequestDispatcher dispatcher;
 		if(counter == 10){
+			// TODO add winner to session
 			dispatcher = getServletContext().getRequestDispatcher("/winner.jsp"); 
 		}else{
+			//go to the category selection without starting a new game
 			dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp"); 
 		}
 		dispatcher.forward(request, response);

@@ -41,17 +41,15 @@ public class QuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//For Testing (not entering the method)
 		PrintWriter out = response.getWriter(); out.println("<html><body>");
-		out.println("Hello " ); out.println("</body></html>");
-		/*ServletContext servletContext = getServletContext();
-		JeopardyFactory factory = new ServletJeopardyFactory(servletContext);
-		QuestionDataProvider provider = factory.createQuestionDataProvider();
-		List<Category> categories = provider.getCategoryData();*/
+		out.println("Hello POST" ); out.println("</body></html>");
+
 		HttpSession session = request.getSession(true);
 		List<Category> categories = (List<Category>) session.getAttribute("categories");
+		int counter = (int) session.getAttribute("counter");
 		
 		String selectedValue=request.getParameter("question_selection");	
-		//System.out.println(selectedValue);
         if(!selectedValue.equals("")){
         	try{
         		int selectedQuestionId = Integer.parseInt(selectedValue);
@@ -59,7 +57,9 @@ public class QuestionServlet extends HttpServlet {
         			for(Question q : cat.getQuestions()){
         				if(q.getId() == selectedQuestionId){
         					session.setAttribute("currentQuestion", q);
+        					session.setAttribute("counter", counter++);
         					q.setAnswered(true);
+ 
         					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
         					dispatcher.forward(request, response);
         					return;
