@@ -1,6 +1,7 @@
 package at.ac.tuwien.big.we15.lab2.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import at.ac.tuwien.big.we15.lab2.api.Category;
+import at.ac.tuwien.big.we15.lab2.api.Question;
 
 /**
  * Servlet implementation class QuestionServlet
@@ -35,11 +40,29 @@ public class QuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String selectedValue=request.getParameter("question_selection");		
+		
+		/*ServletContext servletContext = getServletContext();
+		JeopardyFactory factory = new ServletJeopardyFactory(servletContext);
+		QuestionDataProvider provider = factory.createQuestionDataProvider();
+		List<Category> categories = provider.getCategoryData();*/
+		HttpSession session = request.getSession(true);
+		List<Category> categories = (List<Category>) session.getAttribute("categories");
+		
+		String selectedValue=request.getParameter("question_selection");	
+		//System.out.println(selectedValue);
         if(!selectedValue.equals("")){
         	try{
         		int selectedQuestionId = Integer.parseInt(selectedValue);
-        		
+        		for(Category cat : categories){
+        			for(Question q : cat.getQuestions()){
+        				if(q.getId() == selectedQuestionId){
+        					session.setAttribute("currentQuestion", q);
+        					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
+        					dispatcher.forward(request, response);
+        					return;
+        				}
+        			}
+        		}
         	}catch(Exception e){
         		System.out.println("Question is not available: " + e.getMessage());
         	}

@@ -40,16 +40,15 @@ public class GameServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// ServletContext coming from javax.servlet.GenericServlet or subclass
 		ServletContext servletContext = getServletContext();
 		JeopardyFactory factory = new ServletJeopardyFactory(servletContext);
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
 		List<Category> categories = provider.getCategoryData();
 		HttpSession session = request.getSession(true); 
+		
 		session.setAttribute("categories", categories);
 		
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp"); 
+		RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/jeopardy.jsp"); 
 		dispatcher.forward(request, response);
 	}
 

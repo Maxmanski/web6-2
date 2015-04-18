@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page session="true" %>
+
+<jsp:useBean id="currentQuestion" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -67,7 +72,7 @@
             
       <!-- Question -->
       <section id="question" aria-labelledby="questionheading">
-            <form id="questionform" action="jeopardy.xhtml" method="get">
+            <form id="questionform" action="QuestionEvaluation" method="get">
                <h2 id="questionheading" class="accessibility">Frage</h2>
                <p id="questiontype">TUWIEN für € 300</p>
                <p id="questiontext">Diese Lehrveranstaltungen bilden das Modul EWA.</p>
