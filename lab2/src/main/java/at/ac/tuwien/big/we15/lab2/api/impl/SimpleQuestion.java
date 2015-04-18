@@ -31,6 +31,8 @@ public class SimpleQuestion implements Question {
 	private List<Answer> rightAnswers;
 
 	private Category category;
+	
+	private boolean answered;
 
 	public SimpleQuestion() {
 		this.text = "";
@@ -38,6 +40,7 @@ public class SimpleQuestion implements Question {
 		this.wrongAnswers = new ArrayList<>();
 		this.rightAnswers = new ArrayList<>();
 		this.category = null;
+		this.setAnswered(false);
 	}
 
 	public SimpleQuestion(int id, String text, int value, Category category) {
@@ -48,6 +51,7 @@ public class SimpleQuestion implements Question {
 		this.wrongAnswers = new ArrayList<>();
 		this.rightAnswers = new ArrayList<>();
 		this.category = category;
+		this.setAnswered(false);
 	}
 
 	public SimpleQuestion(int id, String text, int value, List<Answer> wrongChoices,
@@ -151,7 +155,15 @@ public class SimpleQuestion implements Question {
 			category.addQuestion(this);
 		}
 	}
+	
+	public boolean isAnswered() {
+		return answered;
+	}
 
+	public void setAnswered(boolean answered) {
+		this.answered = answered;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -200,5 +212,7 @@ public class SimpleQuestion implements Question {
 				+ ", wrongChoices=" + wrongAnswers + ", correctChoices="
 				+ rightAnswers + ", category=" + ((category != null)? category.getName() : "null") + "]";
 	}
+
+
 
 }

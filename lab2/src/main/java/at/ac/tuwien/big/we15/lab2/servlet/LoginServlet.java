@@ -36,7 +36,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true); 
-		//session.setAttribute("counter", 0);
+		session.setAttribute("counter", 0);
+		
+		//TODO: User zur session hinzufuegen
+		// String username = request.getParameter("username"),
+		// User user = new User();
+		// user.setName(username);
+		// session.setAttribute("user", user);
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GameServlet"); 
 		dispatcher.forward(request, response);

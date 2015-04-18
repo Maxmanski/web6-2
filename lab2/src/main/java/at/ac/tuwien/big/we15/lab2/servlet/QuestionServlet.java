@@ -1,6 +1,7 @@
 package at.ac.tuwien.big.we15.lab2.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -26,21 +27,22 @@ public class QuestionServlet extends HttpServlet {
      */
     public QuestionServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter(); out.println("<html><body>");
+		out.println("Hello GET" ); out.println("</body></html>");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		PrintWriter out = response.getWriter(); out.println("<html><body>");
+		out.println("Hello " ); out.println("</body></html>");
 		/*ServletContext servletContext = getServletContext();
 		JeopardyFactory factory = new ServletJeopardyFactory(servletContext);
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
@@ -57,6 +59,7 @@ public class QuestionServlet extends HttpServlet {
         			for(Question q : cat.getQuestions()){
         				if(q.getId() == selectedQuestionId){
         					session.setAttribute("currentQuestion", q);
+        					q.setAnswered(true);
         					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
         					dispatcher.forward(request, response);
         					return;

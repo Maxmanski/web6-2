@@ -100,4 +100,17 @@ public interface Question {
 	 *            the category to set
 	 */
 	public void setCategory(Category category);
+	
+	/**
+	 * 
+	 * @return if the question is already answered
+	 */
+	public boolean isAnswered();
+
+	/**
+	 * 
+	 * @param answered
+	 *            set the question to answered / unanswered
+	 */
+	public void setAnswered(boolean answered);
 }
