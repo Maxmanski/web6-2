@@ -1,6 +1,8 @@
 package at.ac.tuwien.big.we15.lab2.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +35,15 @@ public class QuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		 String selectedValue=request.getParameter("question_selection");		
+        if(!selectedValue.equals("")){
+        	try{
+        		int selectedQuestionId = Integer.parseInt(selectedValue);
+        		
+        	}catch(Exception e){
+        		System.out.println("Question is not available: " + e.getMessage());
+        	}
+        }
 	}
 
 }

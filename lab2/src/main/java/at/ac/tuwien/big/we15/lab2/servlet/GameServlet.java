@@ -45,9 +45,10 @@ public class GameServlet extends HttpServlet {
 		JeopardyFactory factory = new ServletJeopardyFactory(servletContext);
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
 		List<Category> categories = provider.getCategoryData();
-		
 		HttpSession session = request.getSession(true); 
-		session.setAttribute("categories", categories.get(0));
+		session.setAttribute("categories", categories);
+		
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp"); 
 		dispatcher.forward(request, response);
 	}
