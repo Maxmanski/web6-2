@@ -8,8 +8,14 @@ import at.ac.tuwien.big.we15.lab2.api.Question;
 
 public class SimpleGameEvaluation implements GameEvaluation {
 
+	private Question q;
+	
+	public SimpleGameEvaluation(Question q){
+		this.q = q;
+	}
+	
 	@Override
-	public boolean evaluate(Question q, List<Answer> givenAnswers) {
+	public boolean evaluate(List<Answer> givenAnswers) {
 		List<Answer> rightAnswers, allAnswers;
 		rightAnswers = q.getCorrectAnswers();
 		allAnswers = q.getAllAnswers();
@@ -24,6 +30,11 @@ public class SimpleGameEvaluation implements GameEvaluation {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void setQuestion(Question q) {
+		this.q = q;
 	}
 
 }
