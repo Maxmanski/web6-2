@@ -3,7 +3,6 @@
 <%@ page import="java.util.*" %>
 <%@ page session="true" %>
 
-<!-- jsp:useBean id="category" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory" /  -->
 <jsp:useBean id="categories" type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>" scope="session"></jsp:useBean>
 
 <?xml version="1.0" encoding="UTF-8"?>
