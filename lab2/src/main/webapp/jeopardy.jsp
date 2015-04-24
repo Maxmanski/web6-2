@@ -85,7 +85,7 @@
                <section class="questioncategory" aria-labelledby="heading${loop.index+1}">
                   <h3 id="heading${loop.index+1}" class="tile category-title"><span class="accessibility">Kategorie: </span><c:out value="${category.name}"/></h3>
                   <ol class="category_questions">      
-                  <c:forEach items="${categories.questions}" var="question" varStatus="innerloop">
+                  <c:forEach items="${category.questions}" var="question" varStatus="innerloop">
         		  	<li><input name="question_selection" id="question_${question.id}" value="${question.id}" type="radio"/><label class="tile clickable" for="question_${question.id}">€ 200</label></li>
         		  </c:forEach>
                   </ol>
