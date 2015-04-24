@@ -1,15 +1,7 @@
-<<<<<<< HEAD
 #Ignore Settings from Eclipse
-.settings/
+lab2/.settings/
 
 #Ignore classpath and  project file
-.classpath
-.project
+lab2/.classpath
+lab2/.project
 
-target/
-=======
-/target/
-.classpath
-/.settings/
-.project
->>>>>>> origin/master
