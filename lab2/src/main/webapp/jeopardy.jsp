@@ -69,7 +69,7 @@
                   </tr>
                </table>
             </section>
-            <p id="round">Fragen: 2 / 10</p>
+            <p id="round">Fragen: <%= session.getAttribute("counter") %> / 10</p>
          </section>
 
          <!-- Question -->
