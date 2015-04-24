@@ -84,7 +84,7 @@
       <section id="question" aria-labelledby="questionheading">
             <form id="questionform" action="EvaluationServlet" method="post">
                <h2 id="questionheading" class="accessibility">Frage</h2>
-               <p id="questiontype"><%= currentQuestion.getCategory().getName() %> für &euro; <%= session.getAttribute("price") %> </p>
+               <p id="questiontype"><%= currentQuestion.getCategory().getName() %> für &euro; <%= currentQuestion.getValue()*10 %> </p>
                <p id="questiontext">Diese Lehrveranstaltungen bilden das Modul EWA.</p>
                <ul id="answers">
                   <li><input name="answers" id="answer_1" value="1" type="checkbox"/><label class="tile clickable" for="answer_1">Was ist IT Strategie?</label></li>

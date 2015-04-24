@@ -1,12 +1,15 @@
-<%@page import="at.ac.tuwien.big.we15.lab2.api.Avatar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Avatar"%>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.User" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" %>
 <%@ page session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:useBean id="categories" type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>" scope="session" />
 <jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
 <jsp:useBean id="opponent" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
+<jsp:useBean id="currentQuestion" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
 <% final Avatar avatar = user.getAvatar(); %>
 <% final Avatar opponentAvatar = opponent.getAvatar(); %>
 
@@ -55,8 +58,8 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">2000 €</td>
-                  </tr>
+                     <td class="playerpoints"><%= user.getScore() %> &euro;</td>
+			    </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
@@ -65,11 +68,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"><%= opponentAvatar.getName() %></td>
+                     <td class="playername"><%= opponent.getName() %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">400 €</td>
+                     <td class="playerpoints"><%= opponent.getScore() %> &euro;</td>
                   </tr>
                </table>
             </section>
@@ -79,9 +82,9 @@
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
-            <p class="user-info">Deadpool hat TUWIEN für € 1000 gewählt.</p>
+            <p class="user-info positive-change">Du hast richtig geantwortet: <%= currentQuestion.getValue()*10 %> €</p>
+            <p class="user-info negative-change"> Deadpool hat falsch geantwortet: - <%= currentQuestion.getValue()*10 %> €</p>
+            <p class="user-info">Deadpool hat <%= currentQuestion.getCategory() == null ? "no Category" : currentQuestion.getCategory().getName() %> für € <%= currentQuestion.getValue()*10 %> gewählt.</p>
             <form id="questionform" action="QuestionServlet" method="post">
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>

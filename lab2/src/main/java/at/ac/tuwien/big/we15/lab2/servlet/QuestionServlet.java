@@ -58,11 +58,12 @@ public class QuestionServlet extends HttpServlet {
         		for(Category cat : categories){
         			for(Question q : cat.getQuestions()){
         				if(q.getId() == selectedQuestionId){
+        					q.setAnswered(true);
         					session.setAttribute("currentQuestion", q);
         					session.setAttribute("counter", ++counter);
-        					session.setAttribute("price", 0);
-        					q.setAnswered(true);
- 
+        					session.setAttribute("price", q.getValue()*10);
+        					session.setAttribute("timeleftvalue", q.getValue());
+        					
         					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
         					dispatcher.forward(request, response);
         					return;
@@ -74,5 +75,6 @@ public class QuestionServlet extends HttpServlet {
         	}
         }
 	}
+	
 
 }
