@@ -2,9 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.User" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" %>
 <%@ page session="true" %>
 
 <jsp:useBean id="categories" type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>" scope="session"></jsp:useBean>
+<jsp:useBean id="currentQuestion" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
@@ -51,7 +53,7 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">2000 €</td>
+                     <td class="playerpoints"> <%= ((User) session.getAttribute("user")).getScore() %> €</td>
                   </tr>
                </table>
             </section>
@@ -61,11 +63,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Deadpool</td>
+                     <td class="playername"> <%= ((User) session.getAttribute("opponent")).getName() %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">400 €</td>
+                     <td class="playerpoints"> <%= ((User) session.getAttribute("opponent")).getScore() %> €</td>
                   </tr>
                </table>
             </section>
@@ -75,9 +77,9 @@
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
-            <p class="user-info">Deadpool hat TUWIEN für € 1000 gewählt.</p>
+            <p class="user-info positive-change">Du hast richtig geantwortet: <%= currentQuestion.getValue()*10 %> €</p>
+            <p class="user-info negative-change">Deadpool hat falsch geantwortet: - <%= currentQuestion.getValue()*10 %> €</p>
+            <p class="user-info">Deadpool hat TUWIEN für € <%= currentQuestion.getValue()*10 %> gewählt.</p>
             <form id="questionform" action="QuestionServlet" method="post">
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
