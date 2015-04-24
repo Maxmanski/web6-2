@@ -1,9 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.*" %>
 <%@ page session="true" %>
 
 <jsp:useBean id="currentQuestion" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
+<jsp:useBean id="user" scope="session" class="at.ac.tuwien.big.we15.lab2.api.User" />
+<jsp:useBean id="opponent" scope="session" class="at.ac.tuwien.big.we15.lab2.api.User" />
+
+<% final User firstPlayer = (user.getScore() < opponent.getScore()) ? opponent : user; %>
+<% final User secondPlayer = (user.getScore() < opponent.getScore()) ? user : opponent; %>
+<% final Avatar firstAvatar = firstPlayer.getAvatar(); %>
+<% final Avatar secondAvatar = secondPlayer.getAvatar(); %>
+<% final String firstPlayerName = (user.getScore() < opponent.getScore()) ? opponent.getName() : user.getName() + " (Du)"; %>
+<% final String secondPlayerName = (user.getScore() < opponent.getScore()) ? user.getName() + " (Du)" : opponent.getName(); %>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
@@ -41,29 +51,29 @@
             <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
                <h3 id="firstplayerheading" class="accessibility">Führender Spieler</h3>
-               <img class="avatar" src="img/avatar/black-widow_head.png" alt="Spieler-Avatar Black Widow" />
+               <img class="avatar" src="img/avatar/<%= firstAvatar.getImageHead() %>" alt="Spieler-Avatar <%= firstAvatar.getName() %>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Black Widow (Du)</td>
+                     <td class="playername"><%= firstPlayerName %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">2000 &euro;</td>
+                     <td class="playerpoints"><%= firstPlayer.getScore() %> &euro;</td>
                   </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-               <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
+               <img class="avatar" src="img/avatar/<%= secondAvatar.getImageHead() %>" alt="Spieler-Avatar <%= secondAvatar.getName() %>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Deadpool</td>
+                     <td class="playername"><%= secondPlayerName %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">400 &euro;</td>
+                     <td class="playerpoints"><%= secondPlayer.getScore() %> &euro;</td>
                   </tr>
                </table>
             </section>

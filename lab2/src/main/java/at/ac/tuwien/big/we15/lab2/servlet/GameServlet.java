@@ -1,5 +1,9 @@
 package at.ac.tuwien.big.we15.lab2.servlet;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.io.IOException;
 
@@ -43,19 +47,63 @@ public class GameServlet extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 		JeopardyFactory factory = new ServletJeopardyFactory(servletContext);
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
-		List<Category> categories = provider.getCategoryData();
-		HttpSession session = request.getSession(true); 
-		
-		session.setAttribute("categories", categories);
+		List<Category> categories = provider.getCategoryData(), tmp = new ArrayList<Category>();
+		HttpSession session = request.getSession(true);
 		
 		for(Category c: categories){
-			System.out.println(c.getName());
-			System.out.println("===");
+			// valueQuestionMap: KEY: value of the question; VALUE: list of questions with the according value (KEY)
+			// freshMap: KEY: value of the questions; VALUE: TRUE, if none of the questions with the specified value (KEY) has been answered yet
+			// 													FALSE otherwise
+			HashMap<Integer, List<Question>> valueQuestionMap = new HashMap<Integer, List<Question>>();
+			HashMap<Integer, Boolean> freshMap = new HashMap<Integer, Boolean>();
+			
+			// filling up the maps
 			for(Question q: c.getQuestions()){
-				System.out.println(q.getText() + ": " + q.getValue() + ": " + q.getId());
+				if(!valueQuestionMap.containsKey(q.getValue())){
+					valueQuestionMap.put(q.getValue(), new ArrayList<Question>());
+					freshMap.put(q.getValue(), true);
+				}
+				valueQuestionMap.get(q.getValue()).add(q);
+				freshMap.put(q.getValue(), freshMap.get(q.getValue()) && !q.isAnswered());
 			}
-			System.out.println();
+			
+			// choosing a question per category and value randomly
+			// if a question with this category and value already has been answered: set the
+			// chosen question answered, too
+			Category tmpCategory = new SimpleCategory(c.getName(), new ArrayList<Question>());
+			for(Integer val: valueQuestionMap.keySet()){
+				List<Question> questionList = new ArrayList<Question>(valueQuestionMap.get(val));
+				Collections.shuffle(questionList);
+				Question q = questionList.get(0);
+				
+				if(!freshMap.get(q.getValue())){
+					q.setAnswered(false);
+				}
+				
+				tmpCategory.addQuestion(q);
+			}
+			List<Question> sortedQuestions = new ArrayList<Question>(), tmpQuestions = tmpCategory.getQuestions();
+			
+			// sorting the question list (asc.)
+			while(!tmpQuestions.isEmpty()){
+				Question min = tmpQuestions.get(0);
+				for(Question q: tmpQuestions){
+					if(q.getValue() < min.getValue()){
+						min = q;
+					}
+				}
+				sortedQuestions.add(min);
+				tmpQuestions.remove(min);
+			}
+			
+			tmpCategory.setQuestions(sortedQuestions);
+			tmp.add(tmpCategory);
 		}
+		
+		// set the session's categories value to the determined stuff
+		categories = tmp;
+		session.setAttribute("categories", categories);
+		tmp = null;
 		
 		RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/jeopardy.jsp"); 
 		dispatcher.forward(request, response);

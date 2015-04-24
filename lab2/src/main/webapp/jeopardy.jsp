@@ -1,10 +1,14 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="at.ac.tuwien.big.we15.lab2.api.Avatar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.User" %>
 <%@ page session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="categories" type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>" scope="session"></jsp:useBean>
+<jsp:useBean id="categories" type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>" scope="session" />
+<jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
+<jsp:useBean id="opponent" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
+<% final Avatar avatar = user.getAvatar(); %>
+<% final Avatar opponentAvatar = opponent.getAvatar(); %>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
@@ -43,11 +47,11 @@
             <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
                <h3 id="firstplayerheading" class="accessibility">Führender Spieler</h3>
-               <img class="avatar" src="img/avatar/black-widow_head.png" alt="Spieler-Avatar Black Widow" />
+               <img class="avatar" src="img/avatar/<%= avatar.getImageHead() %>" alt="Spieler-Avatar <%= avatar.getName() %>>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"> <%= ((User) session.getAttribute("user")).getName() %> (Du)</td>
+                     <td class="playername"> <%= user.getName() %> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
@@ -57,11 +61,11 @@
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-               <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
+               <img class="avatar" src="img/avatar/<%= opponentAvatar.getImageHead() %>" alt="Spieler-Avatar <%= opponentAvatar.getName() %>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Deadpool</td>
+                     <td class="playername"><%= opponentAvatar.getName() %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>

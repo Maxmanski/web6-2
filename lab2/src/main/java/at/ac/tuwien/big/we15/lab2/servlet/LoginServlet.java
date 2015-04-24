@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
 import at.ac.tuwien.big.we15.lab2.api.User;
 
 /**
@@ -54,8 +55,15 @@ public class LoginServlet extends HttpServlet {
 		User user = new User();
 		user.setName(request.getParameter("username"));
 		user.setScore(0);
+		user.setAvatar(Avatar.getRandomAvatar());
 		session.setAttribute("user", user);
-
+		
+		User opponent = new User();
+		opponent.setAvatar(Avatar.getOpponent(user.getAvatar()));
+		opponent.setName(opponent.getAvatar().getName());
+		opponent.setScore(0);
+		session.setAttribute("opponent", opponent);
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GameServlet"); 
 		dispatcher.forward(request, response);
 	}

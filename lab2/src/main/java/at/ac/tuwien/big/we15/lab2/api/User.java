@@ -4,6 +4,7 @@ public class User {
 
 	String name;
 	Integer score;
+	Avatar avatar;
 	
 	/**
 	 * 
@@ -35,6 +36,22 @@ public class User {
 	 */
 	public void setScore(Integer score) {
 		this.score = score;
+	}
+
+	/**
+	 * 
+	 * @return The User's Avatar
+	 */
+	public Avatar getAvatar() {
+		return avatar;
+	}
+
+	/**
+	 * 
+	 * @param avatar The User's new Avatar
+	 */
+	public void setAvatar(Avatar avatar) {
+		this.avatar = avatar;
 	}
 	
 }
