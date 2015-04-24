@@ -5,7 +5,7 @@
 <%@ page session="true" %>
 
 <jsp:useBean id="winner" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session"></jsp:useBean>
-
+<jsp:useBean id="loser" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session"></jsp:useBean>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
@@ -43,30 +43,30 @@
             <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
             <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
-               <h3 id="winnerannouncement">Gewinner: Black Widow</h3>
+               <h3 id="winnerannouncement">Gewinner: <%= winner.getName() %></h3>
                <img class="avatar" src="img/avatar/black-widow.png" alt="Spieler-Avatar Black Widow" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Black Widow</td>
+                     <td class="playername"><%= winner.getName() %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">€ 2000</td>
+                     <td class="playerpoints">&euro; <%= winner.getScore() %></td>
                   </tr>
                </table>
             </section>
             <section class="playerinfo" aria-labelledby="loserheading">
-               <h3 id="loserheading" class="accessibility">Verlierer: Deadpool</h3>
+               <h3 id="loserheading" class="accessibility">Verlierer: <%= loser.getName() %></h3>
                <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Deadpool</td>
+                     <td class="playername"><%= loser.getName() %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">€ 400</td>
+                     <td class="playerpoints">&euro; <%= loser.getScore() %></td>
                   </tr>
                </table>
             </section>

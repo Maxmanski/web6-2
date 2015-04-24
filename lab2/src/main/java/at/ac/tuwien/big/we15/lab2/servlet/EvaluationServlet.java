@@ -95,10 +95,13 @@ public class EvaluationServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher;
 		if(counter == 10){
-			if(user.getScore() >= user2.getScore())
+			if(user.getScore() >= user2.getScore()){
 				session.setAttribute("winner", user);
-			else
+				session.setAttribute("loser", user2);
+			}else{
 				session.setAttribute("winner", user2);
+				session.setAttribute("loser", user);
+			}
 			dispatcher = getServletContext().getRequestDispatcher("/winner.jsp"); 
 		}else{
 			//go to the category selection without starting a new game

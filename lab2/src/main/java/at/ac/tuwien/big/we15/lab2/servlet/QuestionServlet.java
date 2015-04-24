@@ -61,7 +61,8 @@ public class QuestionServlet extends HttpServlet {
         					q.setAnswered(true);
         					session.setAttribute("currentQuestion", q);
         					session.setAttribute("counter", ++counter);
-        					session.setAttribute("price", q.getValue());
+        					session.setAttribute("price", q.getValue()*10);
+        					session.setAttribute("timeleftvalue", q.getValue());
         					
         					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
         					dispatcher.forward(request, response);
