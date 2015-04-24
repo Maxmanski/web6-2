@@ -55,12 +55,8 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-<<<<<<< HEAD
                      <td class="playerpoints"><%= user.getScore() %> &euro;</td>
-=======
-                     <td class="playerpoints"> <%= ((User) session.getAttribute("user")).getScore() %> €</td>
->>>>>>> origin/master
-                  </tr>
+			    </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
@@ -69,19 +65,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-<<<<<<< HEAD
                      <td class="playername"><%= user2.getName() %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
                      <td class="playerpoints"><%= user2.getScore() %> &euro;</td>
-=======
-                     <td class="playername"> <%= ((User) session.getAttribute("opponent")).getName() %></td>
-                  </tr>
-                  <tr>
-                     <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints"> <%= ((User) session.getAttribute("opponent")).getScore() %> €</td>
->>>>>>> origin/master
                   </tr>
                </table>
             </section>
