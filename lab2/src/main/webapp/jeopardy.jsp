@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.User" %>
 <%@ page session="true" %>
 
 <!-- jsp:useBean id="category" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory" /  -->
@@ -47,7 +48,7 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Black Widow (Du)</td>
+                     <td class="playername"> <%= ((User) session.getAttribute("user")) %> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
