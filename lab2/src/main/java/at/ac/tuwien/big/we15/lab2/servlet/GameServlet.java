@@ -48,6 +48,15 @@ public class GameServlet extends HttpServlet {
 		
 		session.setAttribute("categories", categories);
 		
+		for(Category c: categories){
+			System.out.println(c.getName());
+			System.out.println("===");
+			for(Question q: c.getQuestions()){
+				System.out.println(q.getText() + ": " + q.getValue() + ": " + q.getId());
+			}
+			System.out.println();
+		}
+		
 		RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/jeopardy.jsp"); 
 		dispatcher.forward(request, response);
 	}
