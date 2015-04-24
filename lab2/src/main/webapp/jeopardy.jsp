@@ -6,6 +6,8 @@
 <%@ page session="true" %>
 
 <jsp:useBean id="categories" type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>" scope="session"></jsp:useBean>
+<jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session"></jsp:useBean>
+<jsp:useBean id="user2" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session"></jsp:useBean>
 <jsp:useBean id="currentQuestion" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -49,12 +51,12 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"> <%= ((User) session.getAttribute("user")).getName() %> (Du)</td>
+                     <td class="playername"> <%= user.getName() %> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints"> <%= ((User) session.getAttribute("user")).getScore() %> €</td>
-                  </tr>
+                     <td class="playerpoints"><%= user.getScore() %> &euro;</td>
+			    </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
@@ -63,11 +65,6 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"> Deadpool</td>
-                  </tr>
-                  <tr>
-                     <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints"> 2000 €</td>
                   </tr>
                </table>
             </section>

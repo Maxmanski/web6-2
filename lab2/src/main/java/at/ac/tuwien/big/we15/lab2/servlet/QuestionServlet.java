@@ -53,31 +53,21 @@ public class QuestionServlet extends HttpServlet {
 		
 		String selectedValue=request.getParameter("question_selection");	
         if(!selectedValue.equals("")){
-        	int price =0;
         	try{
         		int selectedQuestionId = Integer.parseInt(selectedValue);
         		for(Category cat : categories){
-        			int index=1;
         			for(Question q : cat.getQuestions()){
         				if(q.getId() == selectedQuestionId){
-        					//calculate price
-        					switch(index){
-	        					case 1: price = 100; break;
-	        					case 2: price = 200; break;
-	        					case 3: price = 500; break;
-	        					case 4: price = 750; break;
-	        					case 5: price = 1000; break;
-        					}
         					q.setAnswered(true);
         					session.setAttribute("currentQuestion", q);
         					session.setAttribute("counter", ++counter);
-        					session.setAttribute("price", price);
+        					session.setAttribute("price", q.getValue()*10);
+        					session.setAttribute("timeleftvalue", q.getValue());
         					
         					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
         					dispatcher.forward(request, response);
         					return;
         				}
-            			index++;
         			}
         		}
         	}catch(Exception e){
