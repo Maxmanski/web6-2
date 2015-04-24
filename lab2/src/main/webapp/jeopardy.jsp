@@ -48,7 +48,7 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"> <%= ((User) session.getAttribute("user")) %> (Du)</td>
+                     <td class="playername"> <%= ((User) session.getAttribute("user")).getName() %> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
