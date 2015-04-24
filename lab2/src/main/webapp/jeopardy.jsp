@@ -65,6 +65,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
+                      <td class="playername"> <%= user2.getName() %> (Du)</td>
+                  </tr>
+                  <tr>
+                     <th class="accessibility">Spielerpunkte</th>
+                     <td class="playerpoints"><%= user2.getScore() %> &euro;</td>
                   </tr>
                </table>
             </section>
@@ -76,7 +81,7 @@
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
             <p class="user-info positive-change">Du hast richtig geantwortet: <%= currentQuestion.getValue()*10 %> €</p>
             <p class="user-info negative-change"> Deadpool hat falsch geantwortet: - <%= currentQuestion.getValue()*10 %> €</p>
-            <p class="user-info">Deadpool hat TUWIEN für € <%= currentQuestion.getValue()*10 %> gewählt.</p>
+            <p class="user-info">Deadpool hat <%= currentQuestion.getCategory() == null ? "no Category" : currentQuestion.getCategory().getName() %> für € <%= currentQuestion.getValue()*10 %> gewählt.</p>
             <form id="questionform" action="QuestionServlet" method="post">
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
