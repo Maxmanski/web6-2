@@ -49,7 +49,7 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">2000 €</td>
+                     <td class="playerpoints">2000 &euro;</td>
                   </tr>
                </table>
             </section>
@@ -63,7 +63,7 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">400 €</td>
+                     <td class="playerpoints">400 &euro;</td>
                   </tr>
                </table>
             </section>
@@ -74,7 +74,7 @@
       <section id="question" aria-labelledby="questionheading">
             <form id="questionform" action="EvaluationServlet" method="post">
                <h2 id="questionheading" class="accessibility">Frage</h2>
-               <p id="questiontype">TUWIEN für € 300</p>
+               <p id="questiontype"><%= currentQuestion.getCategory().getName() %> für &euro; </p>
                <p id="questiontext">Diese Lehrveranstaltungen bilden das Modul EWA.</p>
                <ul id="answers">
                   <li><input name="answers" id="answer_1" value="1" type="checkbox"/><label class="tile clickable" for="answer_1">Was ist IT Strategie?</label></li>

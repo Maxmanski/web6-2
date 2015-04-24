@@ -60,6 +60,8 @@ public class QuestionServlet extends HttpServlet {
         				if(q.getId() == selectedQuestionId){
         					session.setAttribute("currentQuestion", q);
         					session.setAttribute("counter", counter++);
+        					//TODO set price
+        					//session.setAttribute("price", 0);
         					q.setAnswered(true);
  
         					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 

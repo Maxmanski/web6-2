@@ -86,6 +86,20 @@ public class EvaluationServlet extends HttpServlet {
 		// END OF AI & EVALUATION TEST
 		// TODO REMOVE
 		
+		Question question = (Question) session.getAttribute("currentQuestion");
+		String selectedValue=request.getParameter("answers");
+		Answer selectedAnswer = new SimpleAnswer();
+		try{
+    		int selectedAnswerId = Integer.parseInt(selectedValue);
+    		for(Answer answer : question.getAllAnswers()){
+        		if(answer.getId() == selectedAnswerId){
+        			selectedAnswer = answer;
+        		}
+    		}
+    	}catch(Exception e){
+    		System.out.println("Question is not available: " + e.getMessage());
+    	}
+		
 		//TODO add score to the session
 		
 		RequestDispatcher dispatcher;
