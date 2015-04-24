@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import at.ac.tuwien.big.we15.lab2.api.User;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -44,14 +46,16 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession(true); 
 		session.setAttribute("counter", 0);
 
-		//TODO: set score to 0
+		if(request.getParameter("username") == null){
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp"); 
+			dispatcher.forward(request, response);
+		}
 		
-		//TODO: User zur session hinzufuegen
-		// String username = request.getParameter("username"),
-		// User user = new User();
-		// user.setName(username);
-		// session.setAttribute("user", user);
-		
+		User user = new User();
+		user.setName(request.getParameter("username"));
+		user.setScore(0);
+		session.setAttribute("user", user);
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GameServlet"); 
 		dispatcher.forward(request, response);
 	}
