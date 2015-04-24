@@ -33,6 +33,7 @@ public class QuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 		PrintWriter out = response.getWriter(); out.println("<html><body>");
 		out.println("Hello GET" ); out.println("</body></html>");
 	}
@@ -42,10 +43,11 @@ public class QuestionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//For Testing (not entering the method)
-		PrintWriter out = response.getWriter(); out.println("<html><body>");
-		out.println("Hello POST" ); out.println("</body></html>");
-
 		HttpSession session = request.getSession(true);
+		PrintWriter out = response.getWriter(); out.println("<html><body>");
+		out.println("Hello POST" ); 
+		out.println("</body></html>");
+
 		List<Category> categories = (List<Category>) session.getAttribute("categories");
 		int counter = (int) session.getAttribute("counter");
 		
