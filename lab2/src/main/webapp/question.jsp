@@ -4,6 +4,8 @@
 <%@ page session="true" %>
 
 <jsp:useBean id="currentQuestion" scope="session" class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
+<jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session"></jsp:useBean>
+<jsp:useBean id="user2" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session"></jsp:useBean>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
@@ -45,11 +47,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Black Widow (Du)</td>
+                     <td class="playername"><%= user.getName() %> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">2000 &euro;</td>
+                     <td class="playerpoints"><%= user.getScore() %> &euro;</td>
                   </tr>
                </table>
             </section>
@@ -59,11 +61,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Deadpool</td>
+                     <td class="playername"><%= user2.getName() %></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">400 &euro;</td>
+                     <td class="playerpoints"><%= user2.getScore() %> &euro;</td>
                   </tr>
                </table>
             </section>

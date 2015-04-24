@@ -55,6 +55,11 @@ public class LoginServlet extends HttpServlet {
 		user.setName(request.getParameter("username"));
 		user.setScore(0);
 		session.setAttribute("user", user);
+		
+		User user2 = new User();
+		user2.setName("Deadpool");
+		user2.setScore(0);
+		session.setAttribute("user2", user2);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GameServlet"); 
 		dispatcher.forward(request, response);

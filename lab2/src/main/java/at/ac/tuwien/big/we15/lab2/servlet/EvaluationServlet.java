@@ -17,6 +17,7 @@ import at.ac.tuwien.big.we15.lab2.api.Answer;
 import at.ac.tuwien.big.we15.lab2.api.Category;
 import at.ac.tuwien.big.we15.lab2.api.GameEvaluation;
 import at.ac.tuwien.big.we15.lab2.api.Question;
+import at.ac.tuwien.big.we15.lab2.api.User;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleAIPlayer;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleAnswer;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory;
@@ -71,15 +72,33 @@ public class EvaluationServlet extends HttpServlet {
 		}
 		
 		AIPlayer ai = new SimpleAIPlayer();
+		List<Answer> answersAiList = ai.answer(question);
 		GameEvaluation evaluation = new SimpleGameEvaluation(question);
 		boolean correctAnswer = evaluation.evaluate(answersList);
+		boolean correctAiAnswer = evaluation.evaluate(answersAiList);
+
+		User user = (User) session.getAttribute("user");
+		User user2 = (User) session.getAttribute("user2");
+		
 		if(correctAnswer){
-			//TODO add score to the session
+			user.setScore(user.getScore()+question.getValue()*10);
+		}else{
+			user.setScore(user.getScore()-question.getValue()*10);
 		}
+		if(correctAiAnswer){
+			user2.setScore(user2.getScore()+question.getValue()*10);
+		}else{
+			user2.setScore(user2.getScore()-question.getValue()*10);
+		}
+		session.setAttribute("user", user);
+		session.setAttribute("user", user2);
 		
 		RequestDispatcher dispatcher;
 		if(counter == 10){
-			// TODO add winner to session
+			if(user.getScore() >= user2.getScore())
+				session.setAttribute("winner", user);
+			else
+				session.setAttribute("winner", user2);
 			dispatcher = getServletContext().getRequestDispatcher("/winner.jsp"); 
 		}else{
 			//go to the category selection without starting a new game
