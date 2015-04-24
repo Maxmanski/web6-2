@@ -26,7 +26,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="loginlink" title="Klicke hier um dich anzumelden" href="login.xhtml" accesskey="l">Anmelden</a></li>
+				<li><a class="orangelink navigationlink" id="loginlink" title="Klicke hier um dich anzumelden" href="login.jsp" accesskey="l">Anmelden</a></li>
 			</ul>
 		</nav>
       
@@ -34,7 +34,7 @@
       <div id="register" role="main"> 
             <!-- Register section -->
             <h2 id="registerheading" class="accessibility">Registrierung</h2>
-            <form action="login.xhtml" method="post">
+            <form action="login.jsp" method="post">
                 <fieldset>
                     <legend>Persönliche Daten</legend>
                     <label for="firstname">Vorname:</label>

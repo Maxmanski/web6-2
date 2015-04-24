@@ -2,6 +2,7 @@ package at.ac.tuwien.big.we15.lab2.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -19,10 +20,7 @@ import at.ac.tuwien.big.we15.lab2.api.GameEvaluation;
 import at.ac.tuwien.big.we15.lab2.api.Question;
 import at.ac.tuwien.big.we15.lab2.api.User;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleAIPlayer;
-import at.ac.tuwien.big.we15.lab2.api.impl.SimpleAnswer;
-import at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleGameEvaluation;
-import at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion;
 
 /**
  * Servlet implementation class EvaluationServlet
@@ -36,7 +34,6 @@ public class EvaluationServlet extends HttpServlet {
      */
     public EvaluationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -54,6 +51,7 @@ public class EvaluationServlet extends HttpServlet {
 		int counter = (int) session.getAttribute("counter");
 		Question question = (Question) session.getAttribute("currentQuestion");
 		
+		// get the user's answers
 		List<Answer> answersList = new ArrayList<Answer>();
 		if(request.getParameterValues("answers") != null){
 			for(String answerId: request.getParameterValues("answers")){
@@ -71,35 +69,54 @@ public class EvaluationServlet extends HttpServlet {
 			}
 		}
 		
-		AIPlayer ai = new SimpleAIPlayer();
-		List<Answer> answersAiList = ai.answer(question);
+		List<Category> categories = (List<Category>) session.getAttribute("categories");
+		List<Question> possibleQuestions = new ArrayList<Question>();
+		for(Category c: categories){
+			for(Question q: c.getQuestions()){
+				if(!q.isAnswered()){
+					possibleQuestions.add(q);
+				}
+			}
+		}
+		
+		Collections.shuffle(possibleQuestions);
+		Question aiQuestion = possibleQuestions.get(0);
+		aiQuestion.setAnswered(true);
+		
+		// evaluate questions
+		AIPlayer ai = new SimpleAIPlayer(25.0, 75.0);
+		List<Answer> answersAiList = ai.answer(aiQuestion);
 		GameEvaluation evaluation = new SimpleGameEvaluation(question);
 		boolean correctAnswer = evaluation.evaluate(answersList);
 		boolean correctAiAnswer = evaluation.evaluate(answersAiList);
-
+		
 		User user = (User) session.getAttribute("user");
-		User user2 = (User) session.getAttribute("user2");
+		User opponent = (User) session.getAttribute("opponent");
 		
 		if(correctAnswer){
 			user.setScore(user.getScore()+question.getValue()*10);
 		}else{
 			user.setScore(user.getScore()-question.getValue()*10);
 		}
+		
 		if(correctAiAnswer){
-			user2.setScore(user2.getScore()+question.getValue()*10);
+			opponent.setScore(opponent.getScore()+aiQuestion.getValue()*10);
 		}else{
-			user2.setScore(user2.getScore()-question.getValue()*10);
+			opponent.setScore(opponent.getScore()-aiQuestion.getValue()*10);
 		}
+		
 		session.setAttribute("user", user);
-		session.setAttribute("user", user2);
+		session.setAttribute("opponent", opponent);
+		session.setAttribute("categories", categories);
 		
 		RequestDispatcher dispatcher;
+		// after 10 rounds: redirect to winner.jsp
 		if(counter == 10){
-			if(user.getScore() >= user2.getScore()){
+			if(user.getScore() >= opponent.getScore()){
 				session.setAttribute("winner", user);
-				session.setAttribute("loser", user2);
+				session.setAttribute("loser", opponent);
 			}else{
-				session.setAttribute("winner", user2);
+				session.setAttribute("winner", opponent);
 				session.setAttribute("loser", user);
 			}
 			dispatcher = getServletContext().getRequestDispatcher("/winner.jsp"); 
