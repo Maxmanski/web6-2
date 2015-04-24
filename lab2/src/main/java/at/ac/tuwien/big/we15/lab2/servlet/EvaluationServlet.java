@@ -51,56 +51,31 @@ public class EvaluationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true); 
 		int counter = (int) session.getAttribute("counter");
+		Question question = (Question) session.getAttribute("currentQuestion");
 		
+		List<Answer> answersList = new ArrayList<Answer>();
 		if(request.getParameterValues("answers") != null){
-			for(String answer: request.getParameterValues("answers")){
-				// iterating over the specified answers
-				// (strings from "1" to "n")
+			for(String answerId: request.getParameterValues("answers")){
+				try{
+		    		int selectedAnswerId = Integer.parseInt(answerId);
+		    		for(Answer answer : question.getAllAnswers()){
+		        		if(answer.getId() == selectedAnswerId){
+		        			answersList.add(answer);
+		        		}
+		    		}
+		    	}catch(Exception e){
+		    		System.out.println("Question is not available: " + e.getMessage());
+		    	}
+				
 			}
 		}
-		
-		// START OF AI AND EVALUATION TEST
-		// TODO REMOVE
-		Answer a = new SimpleAnswer("Me Not Good At Answers", null);
-		Answer b = new SimpleAnswer("Me Good At Answers", null);
-		List<Answer> goodAnswers = new ArrayList<Answer>(), badAnswers = new ArrayList<Answer>();
-		goodAnswers.add(b);
-		badAnswers.add(a);
-		Category c = new SimpleCategory("SSD");
-		Question q = new SimpleQuestion(0, "Question", 100, badAnswers, goodAnswers, c);
-		a.setQuestion(q);
-		b.setQuestion(q);
 		
 		AIPlayer ai = new SimpleAIPlayer();
-		GameEvaluation eval = new SimpleGameEvaluation(q);
-		
-		for(int i=0; i<10; i++){
-			List<Answer> aiAnswers = ai.answer(q);
-			if(eval.evaluate(aiAnswers)){
-				System.out.println("AI CORRECT");
-			}else{
-				System.out.println("AI WRONG");
-			}
-			System.out.println(aiAnswers);
+		GameEvaluation evaluation = new SimpleGameEvaluation(question);
+		boolean correctAnswer = evaluation.evaluate(answersList);
+		if(correctAnswer){
+			//TODO add score to the session
 		}
-		// END OF AI & EVALUATION TEST
-		// TODO REMOVE
-		
-		Question question = (Question) session.getAttribute("currentQuestion");
-		String selectedValue=request.getParameter("answers");
-		Answer selectedAnswer = new SimpleAnswer();
-		try{
-    		int selectedAnswerId = Integer.parseInt(selectedValue);
-    		for(Answer answer : question.getAllAnswers()){
-        		if(answer.getId() == selectedAnswerId){
-        			selectedAnswer = answer;
-        		}
-    		}
-    	}catch(Exception e){
-    		System.out.println("Question is not available: " + e.getMessage());
-    	}
-		
-		//TODO add score to the session
 		
 		RequestDispatcher dispatcher;
 		if(counter == 10){

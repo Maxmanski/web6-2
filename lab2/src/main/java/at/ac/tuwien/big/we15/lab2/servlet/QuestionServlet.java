@@ -59,9 +59,8 @@ public class QuestionServlet extends HttpServlet {
         			for(Question q : cat.getQuestions()){
         				if(q.getId() == selectedQuestionId){
         					session.setAttribute("currentQuestion", q);
-        					session.setAttribute("counter", counter++);
-        					//TODO set price
-        					//session.setAttribute("price", 0);
+        					session.setAttribute("counter", ++counter);
+        					session.setAttribute("price", 0);
         					q.setAnswered(true);
  
         					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
