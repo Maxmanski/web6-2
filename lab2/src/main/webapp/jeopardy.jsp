@@ -51,7 +51,7 @@
 		<h2 id="navheading" class="accessibility">Navigation</h2>
 		<ul>
 			<li><a class="orangelink navigationlink" id="logoutlink"
-				title="Klicke hier um dich abzumelden" href="#" accesskey="l">Abmelden</a></li>
+				title="Klicke hier um dich abzumelden" href="login.jsp" accesskey="l">Abmelden</a></li>
 		</ul>
 	</nav>
 
