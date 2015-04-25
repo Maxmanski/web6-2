@@ -77,7 +77,7 @@ public class GameServlet extends HttpServlet {
 			for(Integer val: valueQuestionMap.keySet()){
 				List<Question> questionList = new ArrayList<Question>(valueQuestionMap.get(val));
 				Collections.shuffle(questionList);
-				Question q = questionList.get(0);
+				Question q = questionList.get((int)(Math.random() * questionList.size()));
 				
 				if(!freshMap.get(q.getValue())){
 					q.setAnswered(false);

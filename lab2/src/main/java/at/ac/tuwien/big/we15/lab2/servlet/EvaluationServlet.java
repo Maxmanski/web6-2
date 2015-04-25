@@ -80,7 +80,7 @@ public class EvaluationServlet extends HttpServlet {
 		}
 		
 		Collections.shuffle(possibleQuestions);
-		Question aiQuestion = possibleQuestions.get(0);
+		Question aiQuestion = possibleQuestions.get((int)(Math.random() * possibleQuestions.size()));
 		aiQuestion.setAnswered(true);
 		
 		// evaluate questions
