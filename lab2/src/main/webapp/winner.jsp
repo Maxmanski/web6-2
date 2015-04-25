@@ -9,6 +9,7 @@
 <jsp:useBean id="opponent" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
 <jsp:useBean id="winner" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
 <jsp:useBean id="loser" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
+<jsp:useBean id="currentQuestion" type="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" scope="session" />
 
 <%
 	final Avatar winnerAvatar = winner.getAvatar();
@@ -54,9 +55,9 @@
 		<section id="gameinfo" aria-labelledby="winnerinfoheading">
 			<h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
 			<p class="user-info positive-change">Du hast richtig geantwortet:
-				+1000 €</p>
-			<p class="user-info negative-change">Deadpool hat falsch
-				geantwortet: -500 €</p>
+				+<%= currentQuestion.getValue()*10 %> €</p>
+			<p class="user-info negative-change"><%= opponent.getName() %> hat falsch
+				geantwortet: -<%= currentQuestion.getValue()*10 %> €</p>
 			<section class="playerinfo leader"
 				aria-labelledby="winnerannouncement">
 				<h3 id="winnerannouncement">
@@ -94,6 +95,7 @@
 			</section>
 		</section>
 		<section id="newgame" aria-labelledby="newgameheading">
+		<%session.setAttribute("counter", 0); %>
 			<h2 id="newgameheading" class="accessibility">Neues Spiel</h2>
 			<form action="GameServlet" method="post">
 				<input class="clickable orangelink contentlink" id="new_game"

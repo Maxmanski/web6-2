@@ -97,7 +97,7 @@
 			</section>
 			<p id="round">
 				Fragen:
-				<%=session.getAttribute("counter")%>
+				<%=(Integer)(session.getAttribute("counter")) +1 %>
 				/ 10
 			</p>
 		</section>
@@ -107,19 +107,19 @@
 			<h2 id="questionheading" class="black accessibility">Jeopardy</h2>
 			<p class="user-info positive-change">
 				Du hast richtig geantwortet:
-				<%=currentQuestion.getValue()*10%>
+				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%>
 				€
 			</p>
 			<p class="user-info negative-change">
-				Deadpool hat falsch geantwortet: -
-				<%=currentQuestion.getValue()*10%>
+				<%=opponent.getName()%> hat falsch geantwortet: -
+				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%>
 				€
 			</p>
 			<p class="user-info">
-				Deadpool hat
+				<%=opponent.getName()%> hat
 				<%=currentQuestion.getCategory() == null ? "no Category" : currentQuestion.getCategory().getName()%>
 				für €
-				<%=currentQuestion.getValue()*10%>
+				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%>
 				gewählt.
 			</p>
 			<form id="questionform" action="QuestionServlet" method="post">
