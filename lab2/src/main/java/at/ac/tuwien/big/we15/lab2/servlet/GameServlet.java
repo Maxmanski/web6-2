@@ -53,6 +53,11 @@ public class GameServlet extends HttpServlet {
 		List<Category> categories = provider.getCategoryData(), tmp = new ArrayList<Category>();
 		HttpSession session = request.getSession(true);
 		
+		if(session.getAttribute("user") == null){
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+			return;
+		}
+		
 		if(request.getParameter("htmlFormName").equals("newGame")){
 			session.setAttribute("counter", 0);
 			session.setAttribute("currentQuestion", null);

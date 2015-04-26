@@ -50,6 +50,11 @@ public class EvaluationServlet extends HttpServlet {
 		int counter = (int) session.getAttribute("counter");
 		Question question = (Question) session.getAttribute("currentQuestion");
 		
+		if(session.getAttribute("user") == null){
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+			return;
+		}
+		
 		// get the user's answers
 		List<Answer> answersList = new ArrayList<Answer>();
 		if(request.getParameterValues("answers") != null){

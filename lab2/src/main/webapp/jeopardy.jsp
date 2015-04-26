@@ -7,6 +7,7 @@
 <%@ page session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:catch var="ex">
 <jsp:useBean id="categories"
 	type="java.util.List<at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory>"
 	scope="session" />
@@ -53,7 +54,7 @@
 		<h2 id="navheading" class="accessibility">Navigation</h2>
 		<ul>
 			<li><a class="orangelink navigationlink" id="logoutlink"
-				title="Klicke hier um dich abzumelden" href="login.jsp" accesskey="l">Abmelden</a></li>
+				title="Klicke hier um dich abzumelden" href="LogoutServlet" accesskey="l">Abmelden</a></li>
 		</ul>
 	</nav>
 
@@ -98,7 +99,7 @@
 				</table>
 			</section>
 			<p id="round">
-				Fragen:
+				Frage:
 				<%=(Integer)(session.getAttribute("counter")) +1 %>
 				/ 10
 			</p>
@@ -208,3 +209,7 @@
 	</script>
 </body>
 </html>
+</c:catch>
+<c:if test="${not empty ex}">
+	<c:redirect url="/login.jsp" />
+</c:if>

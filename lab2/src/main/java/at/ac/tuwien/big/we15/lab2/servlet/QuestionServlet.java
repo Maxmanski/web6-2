@@ -42,7 +42,12 @@ public class QuestionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//For Testing (not entering the method)
 		HttpSession session = request.getSession(true);
-
+		
+		if(session.getAttribute("user") == null){
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+			return;
+		}
+		
 		List<Category> categories = (List<Category>) session.getAttribute("categories");
 		int counter = (int) session.getAttribute("counter");
 		

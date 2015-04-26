@@ -48,8 +48,8 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("counter", 0);
 
 		if(request.getParameter("username") == ""){
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp"); 
-			dispatcher.forward(request, response);
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+			return;
 		}
 		
 		User user = new User();

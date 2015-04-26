@@ -5,6 +5,7 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.*"%>
 <%@ page session="true"%>
 
+<c:catch var="ex">
 <jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
 <jsp:useBean id="opponent" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
 <jsp:useBean id="winner" type="at.ac.tuwien.big.we15.lab2.api.User" scope="session" />
@@ -45,7 +46,7 @@
 		<h2 id="navheading" class="accessibility">Navigation</h2>
 		<ul>
 			<li><a class="orangelink navigationlink" id="logoutlink"
-				title="Klicke hier um dich abzumelden" href="login.jsp"
+				title="Klicke hier um dich abzumelden" href="LogoutServlet"
 				accesskey="l">Abmelden</a></li>
 		</ul>
 	</nav>
@@ -133,3 +134,7 @@
         </script>
 </body>
 </html>
+</c:catch>
+<c:if test="${not empty ex}">
+	<c:redirect url="/login.jsp" />
+</c:if>
