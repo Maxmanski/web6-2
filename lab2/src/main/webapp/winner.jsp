@@ -54,10 +54,37 @@
 	<div role="main">
 		<section id="gameinfo" aria-labelledby="winnerinfoheading">
 			<h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
-			<p class="user-info positive-change">Du hast richtig geantwortet:
-				+<%= currentQuestion.getValue()*10 %> €</p>
-			<p class="user-info negative-change"><%= opponent.getName() %> hat falsch
-				geantwortet: -<%= currentQuestion.getValue()*10 %> €</p>
+			<% if(user.getScore() == 0){ %>
+					<p class="user-info">
+					Du hast noch nicht geantwortet: 
+			<% }else{ 
+					boolean correct = ((Boolean)session.getAttribute("correctUserAnswer")).booleanValue();
+				   if(correct){ %>
+					<p class="user-info positive-change">
+					Du hast richtig geantwortet:
+				<% }else{ %>
+					<p class="user-info negative-change">
+					Du hast falsch geantwortet: -
+				<% } 
+			  } %>
+				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%> &euro;
+			</p>
+			
+			<% if(opponent.getScore() == 0){ %>
+					<p class="user-info">
+					<%=opponent.getName()%> hat noch nicht geantwortet:
+			<% }else{ 
+				boolean correct = ((Boolean)session.getAttribute("correctOpponentAnswer")).booleanValue();
+				   if(correct){ %>
+				   		<p class="user-info positive-change">
+						<%=opponent.getName()%> hat richtig geantwortet:
+				<% }else{ %>
+					<p class="user-info negative-change">
+					<%=opponent.getName()%> hat falsch geantwortet: -
+				<% } 
+			 } %>
+			<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%> &euro;
+			</p>
 			<section class="playerinfo leader"
 				aria-labelledby="winnerannouncement">
 				<h3 id="winnerannouncement">
