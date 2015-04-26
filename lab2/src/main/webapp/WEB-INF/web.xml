@@ -1,2 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0" />
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>EvaluationServlet</servlet-name>
+		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.EvaluationServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GameServlet</servlet-name>
+		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.GameServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>QuestionServlet</servlet-name>
+		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.QuestionServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EvaluationServlet</servlet-name>
+		<url-pattern>/EvaluationServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QuestionServlet</servlet-name>
+		<url-pattern>/QuestionServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GameServlet</servlet-name>
+		<url-pattern>/GameServlet</url-pattern>
+	</servlet-mapping>
+</web-app>
