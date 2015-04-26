@@ -32,7 +32,7 @@ public class SimpleAIPlayer implements AIPlayer{
 		pickedAnswers = new ArrayList<Answer>();
 		
 		for(Answer a: allAnswers){
-			double rnd = Math.random() * 100;
+			double rnd = (Math.random() * 100);
 			
 			if(correctAnswers.contains(a)){
 				if(rnd <= correctProbability){

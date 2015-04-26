@@ -34,7 +34,6 @@ public class GameServlet extends HttpServlet {
      */
     public GameServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

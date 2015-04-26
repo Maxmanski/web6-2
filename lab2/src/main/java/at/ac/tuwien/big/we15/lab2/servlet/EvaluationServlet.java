@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import at.ac.tuwien.big.we15.lab2.api.AIPlayer;
 import at.ac.tuwien.big.we15.lab2.api.Answer;
 import at.ac.tuwien.big.we15.lab2.api.Category;
-import at.ac.tuwien.big.we15.lab2.api.GameEvaluation;
 import at.ac.tuwien.big.we15.lab2.api.Question;
 import at.ac.tuwien.big.we15.lab2.api.User;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleAIPlayer;
@@ -84,11 +83,10 @@ public class EvaluationServlet extends HttpServlet {
 		aiQuestion.setAnswered(true);
 		
 		// evaluate questions
-		AIPlayer ai = new SimpleAIPlayer(10.0, 90.0);
+		AIPlayer ai = new SimpleAIPlayer(5.0, 90.0);
 		List<Answer> answersAiList = ai.answer(aiQuestion);
-		GameEvaluation evaluation = new SimpleGameEvaluation(question);
-		boolean correctAnswer = evaluation.evaluate(answersList);
-		boolean correctAiAnswer = evaluation.evaluate(answersAiList);
+		boolean correctAnswer = new SimpleGameEvaluation(question).evaluate(answersList);
+		boolean correctAiAnswer = new SimpleGameEvaluation(aiQuestion).evaluate(answersAiList);
 		
 		User user = (User) session.getAttribute("user");
 		User opponent = (User) session.getAttribute("opponent");
