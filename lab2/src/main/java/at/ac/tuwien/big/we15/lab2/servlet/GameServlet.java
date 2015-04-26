@@ -57,10 +57,13 @@ public class GameServlet extends HttpServlet {
 		if(request.getParameter("htmlFormName").equals("newGame")){
 			session.setAttribute("counter", 0);
 			session.setAttribute("currentQuestion", null);
+			session.setAttribute("currentAiQuestion", null);
 			User user =(User) session.getAttribute("user");
 			User opponent = (User) session.getAttribute("opponent");
 			user.setScore(0);
 			opponent.setScore(0);
+			session.setAttribute("user", user);
+			session.setAttribute("opponent", opponent);
 		}
 		
 		for(Category c: categories){

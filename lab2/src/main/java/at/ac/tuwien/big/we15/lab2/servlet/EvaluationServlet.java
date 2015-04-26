@@ -110,6 +110,7 @@ public class EvaluationServlet extends HttpServlet {
 		session.setAttribute("categories", categories);
 		session.setAttribute("correctOpponentAnswer", correctAiAnswer);
 		session.setAttribute("correctUserAnswer", correctAnswer);
+		session.setAttribute("currentAiQuestion", aiQuestion);
 		
 		RequestDispatcher dispatcher;
 		// after 10 rounds: redirect to winner.jsp
