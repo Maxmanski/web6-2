@@ -105,15 +105,36 @@
 		<!-- Question -->
 		<section id="question-selection" aria-labelledby="questionheading">
 			<h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-			<p class="user-info positive-change">
-				Du hast richtig geantwortet:
-				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%>
-				€
+			<% if(user.getScore() == 0){ %>
+					<p class="user-info">
+					Du hast noch nicht geantwortet: 
+			<% }else{ 
+					boolean correct = ((Boolean)session.getAttribute("correctUserAnswer")).booleanValue();
+				   if(correct){ %>
+					<p class="user-info positive-change">
+					Du hast richtig geantwortet:
+				<% }else{ %>
+					<p class="user-info negative-change">
+					Du hast falsch geantwortet: -
+				<% } 
+			  } %>
+				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%> &euro;
 			</p>
-			<p class="user-info negative-change">
-				<%=opponent.getName()%> hat falsch geantwortet: -
-				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%>
-				€
+			
+			<% if(opponent.getScore() == 0){ %>
+					<p class="user-info">
+					<%=opponent.getName()%> hat noch nicht geantwortet:
+			<% }else{ 
+				boolean correct = ((Boolean)session.getAttribute("correctOpponentAnswer")).booleanValue();
+				   if(correct){ %>
+				   		<p class="user-info positive-change">
+						<%=opponent.getName()%> hat richtig geantwortet:
+				<% }else{ %>
+					<p class="user-info negative-change">
+					<%=opponent.getName()%> hat falsch geantwortet: -
+				<% } 
+			 } %>
+			<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%> &euro;
 			</p>
 			<p class="user-info">
 				<%=opponent.getName()%> hat

@@ -64,6 +64,8 @@ public class LoginServlet extends HttpServlet {
 		opponent.setScore(0);
 		session.setAttribute("opponent", opponent);
 		
+		session.setAttribute("currentQuestion", null);
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GameServlet"); 
 		dispatcher.forward(request, response);
 	}
