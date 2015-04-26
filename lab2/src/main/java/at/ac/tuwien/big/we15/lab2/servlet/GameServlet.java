@@ -19,6 +19,7 @@ import at.ac.tuwien.big.we15.lab2.api.Category;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.Question;
 import at.ac.tuwien.big.we15.lab2.api.QuestionDataProvider;
+import at.ac.tuwien.big.we15.lab2.api.User;
 import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleCategory;
 /**
@@ -52,6 +53,15 @@ public class GameServlet extends HttpServlet {
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
 		List<Category> categories = provider.getCategoryData(), tmp = new ArrayList<Category>();
 		HttpSession session = request.getSession(true);
+		
+		if(request.getParameter("htmlFormName").equals("newGame")){
+			session.setAttribute("counter", 0);
+			session.setAttribute("currentQuestion", null);
+			User user =(User) session.getAttribute("user");
+			User opponent = (User) session.getAttribute("opponent");
+			user.setScore(0);
+			opponent.setScore(0);
+		}
 		
 		for(Category c: categories){
 			// valueQuestionMap: KEY: value of the question; VALUE: list of questions with the according value (KEY)
