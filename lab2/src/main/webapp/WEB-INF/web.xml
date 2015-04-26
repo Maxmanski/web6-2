@@ -4,22 +4,27 @@
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
+		<display-name>Question Evaluation</display-name>
 		<servlet-name>EvaluationServlet</servlet-name>
 		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.EvaluationServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<display-name>Login</display-name>
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.LoginServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<display-name>Jeopardy</display-name>
 		<servlet-name>GameServlet</servlet-name>
 		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.GameServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<display-name>Question</display-name>
 		<servlet-name>QuestionServlet</servlet-name>
 		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.QuestionServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<display-name>Logout</display-name>
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>at.ac.tuwien.big.we15.lab2.servlet.LogoutServlet</servlet-class>
 	</servlet>
