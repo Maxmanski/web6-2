@@ -84,7 +84,7 @@ public class EvaluationServlet extends HttpServlet {
 		aiQuestion.setAnswered(true);
 		
 		// evaluate questions
-		AIPlayer ai = new SimpleAIPlayer(25.0, 75.0);
+		AIPlayer ai = new SimpleAIPlayer(10.0, 90.0);
 		List<Answer> answersAiList = ai.answer(aiQuestion);
 		GameEvaluation evaluation = new SimpleGameEvaluation(question);
 		boolean correctAnswer = evaluation.evaluate(answersList);
