@@ -16,6 +16,8 @@
 	scope="session" />
 <jsp:useBean id="currentQuestion" scope="session"
 	class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
+<jsp:useBean id="currentAiQuestion" scope="session"
+	class="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" />
 
 <%
 	final Avatar avatar = user.getAvatar();
@@ -137,11 +139,13 @@
 			<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%> &euro;
 			</p>
 			<p class="user-info">
-				<%=opponent.getName()%> hat
-				<%=currentQuestion.getCategory() == null ? "no Category" : currentQuestion.getCategory().getName()%>
-				für €
-				<%=currentQuestion.getCategory() == null ? "0" : currentQuestion.getValue()*10%>
-				gewählt.
+				<%=opponent.getName()%>
+			<% if(currentAiQuestion.getCategory() == null){ %>
+				hat noch keine Frage gewählt.
+			<%}else{ %>
+				 hat <%=currentAiQuestion.getCategory().getName()%>
+				für &euro; <%=currentAiQuestion.getValue()*10%> gewählt.
+			<% } %>
 			</p>
 			<form id="questionform" action="QuestionServlet" method="post">
 				<fieldset>
