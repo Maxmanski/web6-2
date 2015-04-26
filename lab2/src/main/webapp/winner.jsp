@@ -122,9 +122,9 @@
 			</section>
 		</section>
 		<section id="newgame" aria-labelledby="newgameheading">
-		<%session.setAttribute("counter", 0); %>
 			<h2 id="newgameheading" class="accessibility">Neues Spiel</h2>
-			<form action="GameServlet" method="post">
+			<form action="GameServlet" method="post" >
+				<input type="hidden" name="htmlFormName" value="newGame"/>
 				<input class="clickable orangelink contentlink" id="new_game"
 					type="submit" name="restart" value="Neues Spiel" />
 			</form>

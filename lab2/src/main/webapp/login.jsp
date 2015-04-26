@@ -26,7 +26,8 @@
         <div role="main">
             <section id="login" aria-labelledby="loginheading">
                <h2 id="loginheading" class="accessibility">Login</h2>
-                <form action="LoginServlet" method="post">
+                <form action="LoginServlet" method="post" >
+               	 <input type="hidden" name="htmlFormName" value="login"/>
                     <fieldset>
                         <legend id="logindata">Login</legend>
                         <label for="username">Benutzername:</label>

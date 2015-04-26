@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession(true); 
 		session.setAttribute("counter", 0);
 
-		if(request.getParameter("username") == null){
+		if(request.getParameter("username") == ""){
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp"); 
 			dispatcher.forward(request, response);
 		}
